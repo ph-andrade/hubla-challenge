@@ -13,6 +13,19 @@ datasource db {
 model Seller {
   id            String @id @default(uuid())
   name          String @db.VarChar(20) @unique
+  transactions  Transaction[]
 
   @@map("sellers")
+}
+
+model Transaction { 
+  id          String @id @default(uuid())
+  type        Int
+  seller      Seller @relation(fields: [sellerId], references: [id])
+  sellerId    String @default(uuid())
+  product     String @db.VarChar(30)
+  value       Int
+  date        DateTime
+  
+  @@map("transactions")
 }
