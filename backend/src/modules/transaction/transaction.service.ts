@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { validatorDto } from 'src/utils/ValidatorDTO';
 import { TransactionDTO } from './transaction.dto';
 
 @Injectable()
@@ -19,7 +20,9 @@ export class TransactionService {
           sellerName: data.slice(66, 86).trim(),
         };
 
-        return validatedTransactions.push(transaction);
+        if (await validatorDto(TransactionDTO, transaction)) {
+          return validatedTransactions.push(transaction);
+        }
       }),
     );
 
