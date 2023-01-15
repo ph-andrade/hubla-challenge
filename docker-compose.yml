@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  database: 
+    image: mysql
+    container_name: db
+    restart: always
+    tty: true
+    command: --innodb-use-native-aio=0
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=hubla
+    networks:
+      - node-network
+
+  app:
+    build: ./backend
+    container_name: app
+    tty: true
+    networks:
+      - node-network
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./backend:/usr/app
+
+networks:
+  node-network:
+    driver: bridge
