@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { prisma } from 'src/database/prisma';
-import { SellerDTO } from 'src/modules/seller/seller.dto';
+import { ListSellersDTO, SellerDTO } from 'src/modules/seller/seller.dto';
 
 import { SellersRepository } from '../SellersRepository';
 
@@ -14,5 +14,13 @@ export class PrismaSellersRepository implements SellersRepository {
 
   findByName(name: string): Promise<SellerDTO> {
     return prisma.seller.findFirst({ where: { name } });
+  }
+
+  list(query: ListSellersDTO): Promise<SellerDTO[]> {
+    return prisma.seller.findMany({
+      skip: query.page,
+      take: query.limit,
+      include: { transactions: true },
+    });
   }
 }
