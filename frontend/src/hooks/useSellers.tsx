@@ -4,6 +4,8 @@ import {
   useState,
   useContext,
   ReactNode,
+  Dispatch,
+  SetStateAction,
 } from "react";
 
 interface SellersProps {
@@ -12,9 +14,11 @@ interface SellersProps {
 
 interface SellersContextData {
   sellers: Seller[];
-  setSellers: any;
+  setSellers: Dispatch<SetStateAction<Seller[]>>;
   page: number;
-  setPage: any;
+  setPage: Dispatch<SetStateAction<number>>;
+  selectedSeller: Seller | undefined;
+  setSelectedSeller: Dispatch<SetStateAction<Seller | undefined>>;
 }
 
 export const SellersContext = createContext<SellersContextData>(
@@ -23,6 +27,7 @@ export const SellersContext = createContext<SellersContextData>(
 
 export function SellersProvider({ children }: SellersProps) {
   const [sellers, setSellers] = useState<Seller[]>([]);
+  const [selectedSeller, setSelectedSeller] = useState<Seller>();
   const [page, setPage] = useState<number>(0);
 
   return (
@@ -30,6 +35,8 @@ export function SellersProvider({ children }: SellersProps) {
       value={{
         sellers,
         setSellers,
+        selectedSeller,
+        setSelectedSeller,
         page,
         setPage,
       }}

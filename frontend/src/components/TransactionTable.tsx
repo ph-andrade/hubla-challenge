@@ -4,7 +4,7 @@ import React from 'react'
 import { Table } from '../styles/components/Table'
 
 const TransactionTable: React.FC = () => {
-  const { sellers } = useSellersProvider();
+  const { selectedSeller } = useSellersProvider();
 
   return (
     <Table>
@@ -15,14 +15,17 @@ const TransactionTable: React.FC = () => {
           <th>Product</th>
           <th>Value</th>
         </tr>
-        {!!sellers.length && sellers[0].transactions.map((transaction) => (
-          <tr key={transaction.id}>
-            <td>{transaction.date}</td>
-            <td>{transaction.type}</td>
-            <td>{transaction.product}</td>
-            <td>{transaction.value}</td>  
-          </tr>
-        ))}
+        {
+          !!selectedSeller?.transactions.length && 
+            selectedSeller?.transactions.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.date}</td>
+              <td>{transaction.type}</td>
+              <td>{transaction.product}</td>
+              <td>{transaction.value}</td>  
+            </tr>
+          ))
+        }
       </tbody>
     </Table>
   )

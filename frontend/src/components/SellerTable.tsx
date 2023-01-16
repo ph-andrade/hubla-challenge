@@ -5,14 +5,15 @@ import React, { useEffect } from 'react'
 import { Table } from '../styles/components/Table'
 
 const SellerTable: React.FC = () => {
-  const { sellers, setSellers, page } = useSellersProvider();
+  const { sellers, setSellers, setSelectedSeller, page } = useSellersProvider();
 
   useEffect(() => {
     async function loadSellers() {
       const response = await api.get('/seller', { params: { page: 0 } });
 
-      if(response.status === 200) {
+      if(response.status === 200 && response.data.length) {
         setSellers(response.data);
+        setSelectedSeller(response.data[0]);
       }
     }
     
@@ -28,7 +29,7 @@ const SellerTable: React.FC = () => {
           <th>Balance</th>
         </tr>
         {sellers.map((seller) => (
-          <tr key={seller.id}>
+          <tr key={seller.id} onClick={() => setSelectedSeller(seller)}>
             <td>{seller.name}</td>
             <td>{
               seller.transactions.reduce((sum, transaction) => {
