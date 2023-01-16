@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
-  height: 10vh;
+  height: 50px;
   display: flex;
   padding: 50px;
   background-color: ${props => props.theme.colors.primary};
@@ -10,7 +10,7 @@ export const Container = styled.header`
 
   img {
     align-self: center;
-    max-width: 15vh;
-    max-height: 15vh;
+    max-width: 150px;
+    max-height: 150px;
   }
 `;
