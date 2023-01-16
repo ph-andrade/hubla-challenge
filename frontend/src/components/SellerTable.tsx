@@ -1,49 +1,48 @@
-import { useSellersProvider } from '@/hooks/useSellers';
-import api from '@/services/api';
-import React, { useEffect } from 'react'
+import { SellerTableHooks } from '@/interfaces/SellerTableHooks';
+import { OptionContainer } from '@/styles/components/OptionContainer';
+import React from 'react'
 
-import { Table } from '../styles/components/Table'
+import { List } from '../styles/components/List'
+import Pagination from './Pagination';
+import WarnNonContent from './WarnNonContent';
 
-const SellerTable: React.FC = () => {
-  const { sellers, setSellers, setSelectedSeller, page } = useSellersProvider();
-
-  useEffect(() => {
-    async function loadSellers() {
-      const response = await api.get('/seller', { params: { page: 0 } });
-
-      if(response.status === 200 && response.data.length) {
-        setSellers(response.data);
-        setSelectedSeller(response.data[0]);
-      }
-    }
-    
-    loadSellers();
-
-  }, [page]);
-
+const SellerTable: React.FC<SellerTableHooks> = ({
+  sellers, 
+  setSelectedSeller, 
+  page, 
+  setPage
+}) => {
   return (
-    <Table selectable={true}>
-      <tbody>
-        <tr >
-          <th>Seller</th>
-          <th>Balance</th>
-        </tr>
+    <>
+      {sellers.length ? (
+        <List selectable={true}>
+        <div>
+          <span>Name</span>
+          <span>Balance</span>
+        </div>
+
         {sellers.map((seller) => (
-          <tr key={seller.id} onClick={() => setSelectedSeller(seller)}>
-            <td>{seller.name}</td>
-            <td>{
-              seller.transactions.reduce((sum, transaction) => {
-                const { type, value } = transaction;
+          <li key={seller.id} onClick={()=> setSelectedSeller(seller)}>
+            <span>{seller.name}</span>
+            <span>{seller.transactions.reduce((sum, transaction) => {
+              const { type, value } = transaction;
                 if(type === 3) {
                   return sum - value;
                 }
                 return sum + value;
               }, 0)}
-            </td>
-          </tr>
+            </span>
+          </li>
         ))}
-      </tbody>
-    </Table>
+      </List>
+      ): <WarnNonContent />}
+      <OptionContainer>
+        <Pagination 
+          page={page}
+          setPage={setPage}
+        />
+      </OptionContainer>
+    </>
   )
 }
 
