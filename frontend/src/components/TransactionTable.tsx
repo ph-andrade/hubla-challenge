@@ -1,41 +1,28 @@
+import { useSellersProvider } from '@/hooks/useSellers';
 import React from 'react'
 
 import { Table } from '../styles/components/Table'
 
 const TransactionTable: React.FC = () => {
+  const { sellers } = useSellersProvider();
+
   return (
     <Table>
       <tbody>
         <tr>
-          <th>data</th>
-          <th>tipo</th>
-          <th>produto</th>
-          <th>valor</th>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Product</th>
+          <th>Value</th>
         </tr>
-        <tr>
-          <td>2022/02/20</td>
-          <td>Sell</td>
-          <td>CURSO DE DEV</td>
-          <td>2000</td>
-        </tr>
-        <tr>
-          <td>2022/02/20</td>
-          <td>Sell</td>
-          <td>CURSO DE DEV</td>
-          <td>2000</td>
-        </tr>
-        <tr>
-          <td>2022/02/20</td>
-          <td>Sell</td>
-          <td>CURSO DE DEV</td>
-          <td>2000</td>
-        </tr>
-        <tr>
-          <td>2022/02/20</td>
-          <td>Sell</td>
-          <td>CURSO DE DEV</td>
-          <td>2000</td>
-        </tr>
+        {!!sellers.length && sellers[0].transactions.map((transaction) => (
+          <tr key={transaction.id}>
+            <td>{transaction.date}</td>
+            <td>{transaction.type}</td>
+            <td>{transaction.product}</td>
+            <td>{transaction.value}</td>  
+          </tr>
+        ))}
       </tbody>
     </Table>
   )

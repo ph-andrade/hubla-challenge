@@ -5,6 +5,7 @@ import { Container, TableContainer } from '../styles/pages/Home'
 import Header from '@/components/Header'
 import SellerTable from '@/components/SellerTable'
 import TransactionTable from '@/components/TransactionTable'
+import { SellersProvider } from '@/hooks/useSellers'
 
 const Home: React.FC = () => {
   return (
@@ -12,13 +13,14 @@ const Home: React.FC = () => {
       <Header />
       <Container>
         <Head>
-          <title>Homepage</title>
+          <title>Hubla</title>
         </Head>
-        <TableContainer>
-          <SellerTable />
-          <TransactionTable />
-        </TableContainer>
-    
+        <SellersProvider>
+          <TableContainer>
+            <SellerTable />
+            <TransactionTable />
+          </TableContainer>
+        </SellersProvider>
       </Container>
     </>
   )

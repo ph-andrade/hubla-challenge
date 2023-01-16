@@ -1,11 +1,11 @@
-import { SellersProvider } from '@/hooks/useSellers';
+import { useSellersProvider } from '@/hooks/useSellers';
 import api from '@/services/api';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { Table } from '../styles/components/Table'
 
 const SellerTable: React.FC = () => {
-  const { sellers, setSellers, page } = SellersProvider();
+  const { sellers, setSellers, page } = useSellersProvider();
 
   useEffect(() => {
     async function loadSellers() {
@@ -13,7 +13,6 @@ const SellerTable: React.FC = () => {
 
       if(response.status === 200) {
         setSellers(response.data);
-        console.log(response.data, sellers);
       }
     }
     
