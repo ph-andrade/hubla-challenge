@@ -18,7 +18,7 @@ export class PrismaSellersRepository implements SellersRepository {
 
   list(query: ListSellersDTO): Promise<SellerDTO[]> {
     return prisma.seller.findMany({
-      skip: query.page,
+      skip: query.page * query.limit,
       take: query.limit,
       include: { transactions: true },
     });
