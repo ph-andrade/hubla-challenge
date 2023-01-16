@@ -1,9 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { Container } from '../styles/pages/Home'
+import { Container, TableContainer } from '../styles/pages/Home'
 import Header from '@/components/Header'
 import SellerTable from '@/components/SellerTable'
+import TransactionTable from '@/components/TransactionTable'
 
 const Home: React.FC = () => {
   return (
@@ -13,7 +14,11 @@ const Home: React.FC = () => {
         <Head>
           <title>Homepage</title>
         </Head>
-        <SellerTable />
+        <TableContainer>
+          <SellerTable />
+          <TransactionTable />
+        </TableContainer>
+    
       </Container>
     </>
   )
