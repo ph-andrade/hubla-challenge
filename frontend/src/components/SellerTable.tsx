@@ -1,17 +1,15 @@
-import { Sellers } from '@/interfaces/Sellers';
+import { SellersProvider } from '@/hooks/useSellers';
 import api from '@/services/api';
 import React, { useEffect, useState } from 'react'
 
 import { Table } from '../styles/components/Table'
 
 const SellerTable: React.FC = () => {
-  const [page, setPage] = useState<number>(0);
-  const [sellers, setSellers] = useState<Sellers[]>([]);
-  const limit = 20;
+  const { sellers, setSellers, page } = SellersProvider();
 
   useEffect(() => {
     async function loadSellers() {
-      const response = await api.get('/seller', { params: { page: 0, limit } });
+      const response = await api.get('/seller', { params: { page: 0 } });
 
       if(response.status === 200) {
         setSellers(response.data);
