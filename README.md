@@ -52,5 +52,5 @@ Access http://localhost:3333/api#/ for documentation.
 
 #improvement points
 
-add filters in frontend:
+*Add filters in frontend:
 I didn't because my days are very busy because of my work but it would certainly be much better with filters in the listings, but as this is a skills assessment project I believe that filters would be irrelevant for assessment because they are easy tasks. But if this is a problem I can easily review and add them to the project, just let me know.
