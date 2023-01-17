@@ -27,8 +27,6 @@ services:
       - node-network
     ports:
       - "3333:3333"
-    volumes:
-      - ./backend:/usr/app
     depends_on:
       database:
         condition: service_healthy
