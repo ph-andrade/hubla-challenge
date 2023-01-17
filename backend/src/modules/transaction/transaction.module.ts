@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import { TransactionController } from './transaction.controller';
-import { PrismaTransactionsRepository } from 'src/repositories/prisma/PrismaTransactionsRepository';
-import { TransactionsRepository } from 'src/repositories/TransactionsRepository';
-import { SellersRepository } from 'src/repositories/SellersRepository';
-import { PrismaSellersRepository } from 'src/repositories/prisma/PrismaSellersRepository';
+import { PrismaTransactionsRepository } from '../../repositories/prisma/PrismaTransactionsRepository';
+import { TransactionsRepository } from '../../repositories/TransactionsRepository';
+import { SellersRepository } from '../../repositories/SellersRepository';
+import { PrismaSellersRepository } from '../../repositories/prisma/PrismaSellersRepository';
 
 @Module({
   controllers: [TransactionController],

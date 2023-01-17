@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { prisma } from 'src/database/prisma';
+import { prisma } from '../../database/prisma';
 
-import { TransactionDTO } from 'src/modules/transaction/transaction.dto';
+import { TransactionDTO } from '../../modules/transaction/transaction.dto';
 import { TransactionsRepository } from '../TransactionsRepository';
 
 @Injectable()

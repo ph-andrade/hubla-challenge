@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { TransactionsRepository } from 'src/repositories/TransactionsRepository';
+import { TransactionsRepository } from '../../repositories/TransactionsRepository';
 import { TransactionDTO } from './transaction.dto';
-import { validatorDto } from 'src/utils/ValidatorDTO';
-import { SellersRepository } from 'src/repositories/SellersRepository';
+import { validatorDto } from '../../utils/ValidatorDTO';
+import { SellersRepository } from '../../repositories/SellersRepository';
 
 @Injectable()
 export class TransactionService {
@@ -11,9 +11,8 @@ export class TransactionService {
     private sellersRepository: SellersRepository,
   ) {}
 
-  async import(file: Express.Multer.File) {
-    const fileData = file.buffer.toString().split('\n');
-    if (!fileData.length) throw new Error(`There's no data to import`);
+  async import(fileContent: string) {
+    const fileData = fileContent.split('\n');
     const totalRows = fileData.length;
     const failedRows: number[] = [];
     const validatedTransactions: TransactionDTO[] = [];

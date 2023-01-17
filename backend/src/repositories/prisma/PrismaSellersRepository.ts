@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { prisma } from 'src/database/prisma';
-import { ListSellersDTO, SellerDTO } from 'src/modules/seller/seller.dto';
+import { prisma } from '../../database/prisma';
+import { ListSellersDTO, SellerDTO } from '../../modules/seller/seller.dto';
 
 import { SellersRepository } from '../SellersRepository';
 

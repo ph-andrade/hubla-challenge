@@ -29,6 +29,6 @@ export class TransactionController {
     )
     file: Express.Multer.File,
   ) {
-    return this.transactionService.import(file);
+    return this.transactionService.import(file.buffer.toString());
   }
 }

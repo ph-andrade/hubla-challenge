@@ -1,4 +1,4 @@
-import { TransactionDTO } from 'src/modules/transaction/transaction.dto';
+import { TransactionDTO } from '../modules/transaction/transaction.dto';
 
 export interface TransactionsRepository {
   bulkCreate(data: TransactionDTO[]): Promise<number>;

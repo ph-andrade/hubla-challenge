@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { SellerService } from './seller.service';
 import { SellerController } from './seller.controller';
-import { PrismaSellersRepository } from 'src/repositories/prisma/PrismaSellersRepository';
-import { SellersRepository } from 'src/repositories/SellersRepository';
+import { PrismaSellersRepository } from '../../repositories/prisma/PrismaSellersRepository';
+import { SellersRepository } from '../../repositories/SellersRepository';
 
 @Module({
   controllers: [SellerController],
