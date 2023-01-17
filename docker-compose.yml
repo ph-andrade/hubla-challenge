@@ -7,6 +7,8 @@ services:
     restart: always
     tty: true
     command: --innodb-use-native-aio=0
+    volumes: 
+      - mysqldata:/var/lib/mysql
     environment: 
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=hubla
@@ -39,11 +41,13 @@ services:
       - node-network
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/usr/app
     depends_on: 
       - backend
      
 networks:
   node-network:
     driver: bridge
+
+volumes: 
+  mysqldata:
+    driver: local
