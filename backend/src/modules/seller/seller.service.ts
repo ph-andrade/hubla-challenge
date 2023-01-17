@@ -7,6 +7,8 @@ export class SellerService {
   constructor(private sellersRepository: SellersRepository) {}
 
   async list(query: ListSellersDTO): Promise<SellerDTO[]> {
-    return this.sellersRepository.list(query);
+    const page = query.page || 0;
+    const limit = query.limit || 10;
+    return this.sellersRepository.list({ page, limit });
   }
 }

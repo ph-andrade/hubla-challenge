@@ -35,9 +35,6 @@ const ExportFile: React.FC<ExportFileHooks> = ({
           }"`
         );
         loadSellers();
-      } else {
-        console.log(response.data);
-        
       }
     } catch (err: any) {
       NotifyError(err?.response?.data?.message || 'Unexpected Error')
