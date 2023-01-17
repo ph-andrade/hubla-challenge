@@ -3,6 +3,8 @@ import Head from 'next/head'
 import {
   AiOutlineLoading3Quarters,
 } from 'react-icons/ai';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Layout } from '../styles/components/Layout'
 import Header from '@/components/Header'
@@ -12,6 +14,7 @@ import { Seller } from '@/interfaces/Seller'
 import ExportFile from '@/components/ExportFile'
 import { Loading } from '@/styles/components/Loading';
 import api from '@/services/api';
+import { NotifyError } from '@/utils/notify';
 
 const Home: React.FC = () => {
   const [sellers, setSellers] = useState<Seller[]>([]);
@@ -21,12 +24,18 @@ const Home: React.FC = () => {
 
   async function loadSellers(currentPage: number) {
     setLoading(true);
-    const response = await api.get('/seller', { params: { page: currentPage } });
+    try {
+      const response = await api.get('/seller', { params: { page: currentPage } });
 
-    if(response.status === 200) {
-      setSellers(response.data);
+      if(response.status === 200) {
+        setSellers(response.data);
+      } else {
+        NotifyError(response.data?.message || 'Unexpected Error')
+      }
+    } catch (err) {
+      NotifyError('Unexpected Error')
     }
-
+    
     setLoading(false);
   }
 
@@ -40,6 +49,7 @@ const Home: React.FC = () => {
       <Head>
         <title>Hubla</title>
       </Head>
+      <ToastContainer />
       {loading ? (
         <Loading>
           <AiOutlineLoading3Quarters size={200} />
@@ -62,7 +72,10 @@ const Home: React.FC = () => {
                 setPage={setPage}
                 setLoading={setLoading}
               />
-              <ExportFile loadSellers={loadSellers}/>
+              <ExportFile 
+                loadSellers={loadSellers}
+                setLoading={setLoading}
+              />
             </>)
           } 
         </Layout>
